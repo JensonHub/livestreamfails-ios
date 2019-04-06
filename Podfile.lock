@@ -1,0 +1,52 @@
+PODS:
+  - Alamofire (4.8.2)
+  - ESPullToRefresh (2.7)
+  - HandyJSON (4.2.1)
+  - Kingfisher (4.10.1)
+  - ReachabilitySwift (4.3.1)
+  - SnapKit (4.2.0)
+  - SwiftSoup (1.7.4)
+  - ZFPlayer (3.2.8):
+    - ZFPlayer/Core (= 3.2.8)
+  - ZFPlayer/AVPlayer (3.2.8):
+    - ZFPlayer/Core
+  - ZFPlayer/ControlView (3.2.8):
+    - ZFPlayer/Core
+  - ZFPlayer/Core (3.2.8)
+
+DEPENDENCIES:
+  - Alamofire
+  - ESPullToRefresh
+  - HandyJSON
+  - Kingfisher
+  - ReachabilitySwift
+  - SnapKit
+  - SwiftSoup
+  - ZFPlayer (~> 3.0)
+  - ZFPlayer/AVPlayer (~> 3.0)
+  - ZFPlayer/ControlView (~> 3.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - ESPullToRefresh
+    - HandyJSON
+    - Kingfisher
+    - ReachabilitySwift
+    - SnapKit
+    - SwiftSoup
+    - ZFPlayer
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
+  HandyJSON: d0c5fc80204f29056d59d3e5c4587fa0b16b60a8
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SwiftSoup: 92f5b348c131aed8af04f4326db1579ab19fa08c
+  ZFPlayer: 768bb514447884e59fbbc96c8b206cdc70ab7009
+
+PODFILE CHECKSUM: a573b925d19630c140d8edda6e2dfc563e1f15d4
+
+COCOAPODS: 1.6.0.beta.2
