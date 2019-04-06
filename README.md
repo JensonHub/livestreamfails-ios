@@ -1,4 +1,4 @@
-# livestreamfails-ios
+# Livestream Fails for IOS
 
 ### License
 
