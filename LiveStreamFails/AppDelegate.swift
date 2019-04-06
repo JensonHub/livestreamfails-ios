@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        //NavgationBar
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = UIColor.lsfNavgationBarTitleColor()
+        navigationBarAppearace.barTintColor = UIColor.lsfNavgationBarColor()
+        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lsfNavgationBarTitleColor()]
+        
         let failFlow = UICollectionViewFlowLayout()
         let controller = UINavigationController(rootViewController: FailViewController(collectionViewLayout: failFlow))
         window = UIWindow(frame: UIScreen.main.bounds)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E007AF32259348F0043D3D6 /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E007AF22259348F0043D3D6 /* UIColorExt.swift */; };
 		4E96898B224DCD9000D2B6F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E96898A224DCD9000D2B6F5 /* AppDelegate.swift */; };
 		4E968990224DCD9000D2B6F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E96898E224DCD9000D2B6F5 /* Main.storyboard */; };
 		4E968992224DCD9100D2B6F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E968991224DCD9100D2B6F5 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E007AF22259348F0043D3D6 /* UIColorExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
 		4E968987224DCD9000D2B6F5 /* LiveStreamFails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveStreamFails.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E96898A224DCD9000D2B6F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E96898F224DCD9000D2B6F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,6 +61,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4E007AF12259348F0043D3D6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4E007AF22259348F0043D3D6 /* UIColorExt.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		4E96897E224DCD9000D2B6F5 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +90,7 @@
 		4E968989224DCD9000D2B6F5 /* LiveStreamFails */ = {
 			isa = PBXGroup;
 			children = (
+				4E007AF12259348F0043D3D6 /* Extensions */,
 				4E9689AA224DDD8A00D2B6F5 /* Views */,
 				4E9689A7224DD36000D2B6F5 /* Helpers */,
 				4E9689A2224DD12500D2B6F5 /* Services */,
@@ -268,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E9689A6224DD12500D2B6F5 /* LSFNetworkService.swift in Sources */,
+				4E007AF32259348F0043D3D6 /* UIColorExt.swift in Sources */,
 				4E9689A1224DD08400D2B6F5 /* Models.swift in Sources */,
 				4E9689AC224DDDFF00D2B6F5 /* FailCell.swift in Sources */,
 				4E96899E224DCEC300D2B6F5 /* FailViewController.swift in Sources */,
