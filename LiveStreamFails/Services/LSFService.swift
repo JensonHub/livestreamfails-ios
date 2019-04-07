@@ -50,7 +50,6 @@ public enum PostTimeFrame: String, CustomStringConvertible {
 func getStreamerDetail(streamerID: String, failureHandler: ((Reason, String?) -> Void)?, completion: @escaping (Streamer) -> Void) {
     let requestParameters: JSONDictionary = [:]
     
-    println("get Streamer Detail request \(streamerID)")
     let parse: (NSData) -> Streamer? = { data in
         if let data = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue) {
             //println("get Streamer Detail response \(data)")
@@ -134,6 +133,7 @@ func getStreamer(page: Int, failureHandler: ((Reason, String?) -> Void)?, comple
         return nil
     }
     
+    //println("get Streamer request \(requestParameters)")
     let resource = jsonResource(path: "load/loadStreamers.php", method: .GET, requestParameters: requestParameters as JSONDictionary, parse: parse)
     if let failureHandler = failureHandler {
         apiRequest(modifyRequest: {_ in}, baseURL: spBaseURL, resource: resource, failure: failureHandler, completion: completion)
@@ -183,6 +183,7 @@ func getPostDetail(postID: String, failureHandler: ((Reason, String?) -> Void)?,
         return nil
     }
     
+    //println("get Post Detail request \(requestParameters)")
     let resource = jsonResource(path: "/post/" + postID, method: .GET, requestParameters: requestParameters as JSONDictionary, parse: parse)
     if let failureHandler = failureHandler {
         apiRequest(modifyRequest: {_ in}, baseURL: spBaseURL, resource: resource, failure: failureHandler, completion: completion)
@@ -202,7 +203,7 @@ func getPost(page: Int, mode: PostMode, order: PostOrder, timeFrame: PostTimeFra
 
     let parse: (NSData) -> [Post]? = { data in
         if let data = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue) {
-            //println("get Post response \(data)")
+            println("get Post response \(data)")
             
             do {
                 let doc: Document = try SwiftSoup.parse(data as String)
@@ -241,7 +242,7 @@ func getPost(page: Int, mode: PostMode, order: PostOrder, timeFrame: PostTimeFra
         return nil
     }
 
-    println("get Post request \(requestParameters)")
+    //println("get Post request \(requestParameters)")
     let resource = jsonResource(path: "load/loadPosts.php", method: .GET, requestParameters: requestParameters as JSONDictionary, parse: parse)
     if let failureHandler = failureHandler {
         apiRequest(modifyRequest: {_ in}, baseURL: spBaseURL, resource: resource, failure: failureHandler, completion: completion)
@@ -301,6 +302,7 @@ func getStreamerPost(page: Int, order: PostOrder, timeFrame: PostTimeFrame, stre
         return nil
     }
     
+    //println("get Post request \(requestParameters)")
     let resource = jsonResource(path: "load/loadPosts.php", method: .GET, requestParameters: requestParameters as JSONDictionary, parse: parse)
     if let failureHandler = failureHandler {
         apiRequest(modifyRequest: {_ in}, baseURL: spBaseURL, resource: resource, failure: failureHandler, completion: completion)

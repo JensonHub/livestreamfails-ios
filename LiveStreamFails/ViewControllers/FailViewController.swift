@@ -115,8 +115,6 @@ class FailViewController: UICollectionViewController {
                     strongSelf.posts += posts
                     strongSelf.isFetching = false
                     
-                    println("getPost count :\(posts.count) total: \(strongSelf.posts.count)")
-                    
                     finish?()
                 }
         })
