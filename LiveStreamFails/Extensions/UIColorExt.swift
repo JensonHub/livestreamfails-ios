@@ -16,4 +16,8 @@ extension UIColor {
     class func lsfNavgationBarColor() -> UIColor {
         return UIColor(red: 221.0/255.0, green: 67.0/255.0, blue: 55.0/255.0, alpha: 1.0)
     }
+    
+    class func lsfBgColor() -> UIColor {
+        return UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 1.0)
+    }
 }

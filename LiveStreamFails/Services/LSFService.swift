@@ -166,7 +166,7 @@ func getPostDetail(postID: String, failureHandler: ((Reason, String?) -> Void)?,
                 
                 if let streamerInfoElement = try doc.select("div.post-streamer-info > a").first(){
                     let streamerURL = try streamerInfoElement.attr("href")
-                    postDetail.post!.streamer = (streamerURL as NSString).lastPathComponent
+                    postDetail.post!.streamerID = (streamerURL as NSString).lastPathComponent
                 }
                 
                 if let thumbnailElement = try doc.select("video ").first(){
@@ -225,10 +225,28 @@ func getPost(page: Int, mode: PostMode, order: PostOrder, timeFrame: PostTimeFra
                         newPost.thumbnailURL = try thumbnailElement.attr("src")
                     }
                     
-                    if let streamerInfoElement = try element.select("div.stream-info > small.text-muted > a").first(){
-                        let streamerURL = try streamerInfoElement.attr("href")
-                        newPost.streamer = (streamerURL as NSString).lastPathComponent
+                    let infoElements = try element.select("div.stream-info > small.text-muted > a")
+                    for infoElement in infoElements.array() {
+                        let urlElement = try infoElement.attr("href") as NSString
+                        if urlElement.contains("streamer") {
+                            newPost.streamerID = urlElement.lastPathComponent
+                            newPost.streamer = try infoElement.text()
+                        } else if urlElement.contains("game") {
+                            newPost.gameID = urlElement.lastPathComponent
+                            newPost.game = try infoElement.text()
+                        }
                     }
+                    
+                    let pointElements = try element.select("div.card-body > a > small.text-muted")
+                    for pointElement in pointElements.array() {
+                        let element = try pointElement.text()
+                        if element.contains("points") {
+                            newPost.point = element
+                        } else if element.contains("ago") {
+                            newPost.date = element
+                        }
+                    }
+                    
                     postList.append(newPost)
                 }
                 
@@ -287,7 +305,7 @@ func getStreamerPost(page: Int, order: PostOrder, timeFrame: PostTimeFrame, stre
                     
                     if let streamerInfoElement = try element.select("div.stream-info > small.text-muted > a").first(){
                         let streamerURL = try streamerInfoElement.attr("href")
-                        newPost.streamer = (streamerURL as NSString).lastPathComponent
+                        newPost.streamerID = (streamerURL as NSString).lastPathComponent
                     }
                     postList.append(newPost)
                 }

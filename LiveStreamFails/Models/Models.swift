@@ -21,11 +21,17 @@ class Streamer: NSObject {
 class Post: NSObject {
     var postID: String = ""
     var name: String = ""
+    var streamerID: String = ""
     var streamer: String = ""
+    var gameID: String = ""
+    var game: String = ""
     var thumbnailURL: String = ""
     
+    var point: String = ""
+    var date: String = ""
+    
     public var descriptionInfo: String {
-        return "Post(postID: \(postID), name: \(name), streamer: \(streamer), thumbnailURL: \(thumbnailURL))"
+        return "Post(postID: \(postID), name: \(name), streamer: \(streamer) [\(streamerID)], game: \(game) [\(gameID)], thumbnailURL: \(thumbnailURL), point: \(point), date: \(date))"
     }
 }
 

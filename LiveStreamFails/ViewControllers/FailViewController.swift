@@ -39,7 +39,7 @@ class FailViewController: UICollectionViewController {
     }
     
     fileprivate func setup() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.lsfBgColor()
         collectionView.backgroundColor = .clear
         collectionView.alwaysBounceVertical = true
         collectionView.showsVerticalScrollIndicator = false
@@ -142,13 +142,13 @@ class FailViewController: UICollectionViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2.0
+        return 12.0
     }
 }
 
 extension FailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.width * 11.5 / 16.0 )
+        return CGSize(width: view.frame.width, height: view.frame.width * 11.3 / 16.0 )
     }
 }
 

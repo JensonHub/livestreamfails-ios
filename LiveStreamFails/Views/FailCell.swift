@@ -30,6 +30,33 @@ class FailCell: UICollectionViewCell {
         return label
     }()
     
+    lazy var pointLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.font = .boldSystemFont(ofSize: 10)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var infoStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [usernameLabel, pointLabel])
+        stack.axis = .vertical
+        stack.distribution = .fillEqually
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    lazy var gameLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.font = .boldSystemFont(ofSize: 12)
+        label.textAlignment = .right
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var imageView: UIImageView = {
         let image = UIImageView(image: UIImage(named: "bgView"))
         image.contentMode = .scaleAspectFill
@@ -76,10 +103,13 @@ class FailCell: UICollectionViewCell {
         super.prepareForReuse()
         
         usernameLabel.text = ""
+        pointLabel.text = ""
+        gameLabel.text = ""
         userProfile.image = UIImage(named: "defaultUser")
     }
     
     func initSubViews() {
+        backgroundColor = .white
         addSubview(userProfile)
         userProfile.snp.makeConstraints { (make) in
             make.height.width.equalTo(profileSize)
@@ -87,16 +117,24 @@ class FailCell: UICollectionViewCell {
             make.left.equalTo(self.snp.left).offset(4)
         }
         
-        addSubview(usernameLabel)
-        usernameLabel.snp.makeConstraints { (make) in
+        addSubview(infoStack)
+        infoStack.snp.makeConstraints { (make) in
             make.left.equalTo(userProfile.snp.right).offset(6)
-            make.width.equalTo(120)
+            make.width.equalTo(180)
             make.centerY.equalTo(userProfile.snp.centerY)
         }
 
+        addSubview(gameLabel)
+        gameLabel.snp.makeConstraints { (make) in
+            make.height.equalTo(profileSize)
+            make.left.equalTo(infoStack.snp.right).offset(4)
+            make.top.equalTo(self.snp.top).offset(4)
+            make.right.equalTo(self.snp.right).offset(-8)
+        }
+        
         addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
-            make.top.equalTo(userProfile.snp.bottom).offset(6)
+            make.top.equalTo(userProfile.snp.bottom).offset(8)
             make.width.equalTo(self)
             make.height.equalTo(imageView.snp.width).multipliedBy(9.0 / 16.0)
         }
@@ -113,7 +151,11 @@ class FailCell: UICollectionViewCell {
             imageView.kf.setImage(with: URL(string: post.thumbnailURL))
         }
         
-        getStreamerDetail(streamerID: post.streamer, failureHandler: { reason, errorMessage in
+        usernameLabel.text = post.streamer
+        pointLabel.text = post.point + " . " + post.date
+        gameLabel.text = post.game
+        
+        getStreamerDetail(streamerID: post.streamerID, failureHandler: { reason, errorMessage in
             defaultFailureHandler(reason: reason, errorMessage: errorMessage)
         }, completion: { streamer in
             DispatchQueue.main.async { [weak self] in
@@ -122,8 +164,6 @@ class FailCell: UICollectionViewCell {
                 }
                 
                 strongSelf.streamer = streamer
-                
-                strongSelf.usernameLabel.text = streamer.name
                 if !streamer.avatarURL.isEmpty {
                     strongSelf.userProfile.kf.setImage(with: URL(string: streamer.avatarURL))
                 }
