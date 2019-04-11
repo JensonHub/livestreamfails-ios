@@ -147,8 +147,19 @@ class FailViewController: UICollectionViewController {
 }
 
 extension FailViewController: UICollectionViewDelegateFlowLayout {
+    func heightForView(post: Post, width: CGFloat) -> CGFloat{
+        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.attributedText = NSMutableAttributedString(string: post.name, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
+        label.sizeToFit()
+        return label.frame.height
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.width * 11.3 / 16.0 )
+        if indexPath.item >= posts.count { return CGSize.zero}
+        let textHeight = heightForView(post: posts[indexPath.item], width: view.frame.width - 16)
+        return CGSize(width: view.frame.width, height: (view.frame.width * 9.0 / 16.0) + 59.0 + textHeight) // 59.0 = 40.0 + 18.0 + 1.0
     }
 }
 

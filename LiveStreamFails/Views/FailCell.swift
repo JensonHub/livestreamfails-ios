@@ -57,6 +57,16 @@ class FailCell: UICollectionViewCell {
         return label
     }()
     
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.font = .boldSystemFont(ofSize: 14)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var imageView: UIImageView = {
         let image = UIImageView(image: UIImage(named: "bgView"))
         image.contentMode = .scaleAspectFill
@@ -105,6 +115,7 @@ class FailCell: UICollectionViewCell {
         usernameLabel.text = ""
         pointLabel.text = ""
         gameLabel.text = ""
+        titleLabel.text = ""
         userProfile.image = UIImage(named: "defaultUser")
     }
     
@@ -132,9 +143,16 @@ class FailCell: UICollectionViewCell {
             make.right.equalTo(self.snp.right).offset(-8)
         }
         
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(userProfile.snp.bottom).offset(8)
+            make.left.equalTo(self.snp.left).offset(8)
+            make.right.equalTo(self.snp.right).offset(-8)
+        }
+        
         addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
-            make.top.equalTo(userProfile.snp.bottom).offset(8)
+            make.top.equalTo(titleLabel.snp.bottom).offset(6)
             make.width.equalTo(self)
             make.height.equalTo(imageView.snp.width).multipliedBy(9.0 / 16.0)
         }
@@ -154,6 +172,7 @@ class FailCell: UICollectionViewCell {
         usernameLabel.text = post.streamer
         pointLabel.text = post.point + " . " + post.date
         gameLabel.text = post.game
+        titleLabel.text = post.name
         
         getStreamerDetail(streamerID: post.streamerID, failureHandler: { reason, errorMessage in
             defaultFailureHandler(reason: reason, errorMessage: errorMessage)
