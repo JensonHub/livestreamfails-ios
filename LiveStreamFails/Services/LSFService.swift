@@ -203,7 +203,7 @@ func getPost(page: Int, mode: PostMode, order: PostOrder, timeFrame: PostTimeFra
 
     let parse: (NSData) -> [Post]? = { data in
         if let data = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue) {
-            println("get Post response \(data)")
+            //println("get Post response \(data)")
             
             do {
                 let doc: Document = try SwiftSoup.parse(data as String)
@@ -281,7 +281,7 @@ func getStreamerPost(page: Int, order: PostOrder, timeFrame: PostTimeFrame, stre
     
     let parse: (NSData) -> [Post]? = { data in
         if let data = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue) {
-            //println("get Post response \(data)")
+            //println("get Streamer Post response \(data)")
             
             do {
                 let doc: Document = try SwiftSoup.parse(data as String)
@@ -320,7 +320,7 @@ func getStreamerPost(page: Int, order: PostOrder, timeFrame: PostTimeFrame, stre
         return nil
     }
     
-    //println("get Post request \(requestParameters)")
+    //println("get Streamer Post request \(requestParameters)")
     let resource = jsonResource(path: "load/loadPosts.php", method: .GET, requestParameters: requestParameters as JSONDictionary, parse: parse)
     if let failureHandler = failureHandler {
         apiRequest(modifyRequest: {_ in}, baseURL: spBaseURL, resource: resource, failure: failureHandler, completion: completion)

@@ -153,6 +153,26 @@ extension FailViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension FailViewController {
+    
+    override var shouldAutorotate: Bool {
+        return self.player.shouldAutorotate
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if self.player.isFullScreen {
+            return .lightContent
+        }
+        return .default
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return self.player.isStatusBarHidden
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
+    }
+    
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         scrollView.zf_scrollViewDidEndDecelerating()
     }
