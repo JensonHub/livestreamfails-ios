@@ -164,13 +164,31 @@ func getPostDetail(postID: String, failureHandler: ((Reason, String?) -> Void)?,
                     postDetail.post!.name = try nameElement.text()
                 }
                 
-                if let streamerInfoElement = try doc.select("div.post-streamer-info > a").first(){
-                    let streamerURL = try streamerInfoElement.attr("href")
-                    postDetail.post!.streamerID = (streamerURL as NSString).lastPathComponent
-                }
-                
                 if let thumbnailElement = try doc.select("video ").first(){
                     postDetail.post!.thumbnailURL = try thumbnailElement.attr("poster")
+                }
+                
+                let infoElements = try doc.select("div.post-streamer-info > a")
+                for infoElement in infoElements.array() {
+                    let urlElement = try infoElement.attr("href") as NSString
+                    if urlElement.contains("streamer") {
+                        postDetail.post!.streamerID = urlElement.lastPathComponent
+                        postDetail.post!.streamer = try infoElement.text()
+                    } else if urlElement.contains("game") {
+                        postDetail.post!.gameID = urlElement.lastPathComponent
+                        postDetail.post!.game = try infoElement.text()
+                    }
+                }
+                
+                if let statsInfo = try doc.select("div.post-stats-info").first() {
+                    let pointElements = (try statsInfo.text()).components(separatedBy: " · ")
+                    for pointElement in pointElements {
+                        if pointElement.contains("points") {
+                            postDetail.post!.point = pointElement
+                        } else if pointElement.contains("ago") {
+                            postDetail.post!.date = pointElement
+                        }
+                    }
                 }
                 
                 return postDetail

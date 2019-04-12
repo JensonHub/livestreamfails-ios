@@ -19,6 +19,10 @@ class FailCell: UICollectionViewCell {
         image.clipsToBounds = true
         image.layer.cornerRadius = profileSize/2
         image.translatesAutoresizingMaskIntoConstraints = false
+        
+        image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(FailCell.userClick)))
+        image.isUserInteractionEnabled = true
+        
         return image
     }()
     
@@ -54,6 +58,10 @@ class FailCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(FailCell.gameClick)))
+        label.isUserInteractionEnabled = true
+        
         return label
     }()
     
@@ -87,10 +95,22 @@ class FailCell: UICollectionViewCell {
     var postDetail:PostDetail?
     
     var playClickAction: ((_ url: String?, _ cover: UIImage?) -> Void)?
+    var userClickAction: ((_ user: String?) -> Void)?
+    var gameClickAction: ((_ game: String?) -> Void)?
     
     @objc func playBtnClick() {
         println("playBtn Click")
         self.playClickAction?(postDetail?.videoURL, imageView.image)
+    }
+    
+    @objc func userClick() {
+        println("user Click")
+        self.userClickAction?(postDetail?.post?.streamerID)
+    }
+    
+    @objc func gameClick() {
+        println("game Click")
+        self.gameClickAction?(postDetail?.post?.gameID)
     }
     
     override init(frame: CGRect) {
