@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4E007AF32259348F0043D3D6 /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E007AF22259348F0043D3D6 /* UIColorExt.swift */; };
+		4E03369C2262589800155975 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E03369B2262589800155975 /* UserDetailViewController.swift */; };
+		4E03369E2262737D00155975 /* UserInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E03369D2262737D00155975 /* UserInfoHeader.swift */; };
+		4E0336A022627A8C00155975 /* UserFailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E03369F22627A8C00155975 /* UserFailCell.swift */; };
+		4E0336A2226292F200155975 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0336A1226292F200155975 /* Constants.swift */; };
+		4E7F36A8227024BF00D73704 /* HoverViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F36A7227024BF00D73704 /* HoverViewFlowLayout.swift */; };
 		4E96898B224DCD9000D2B6F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E96898A224DCD9000D2B6F5 /* AppDelegate.swift */; };
 		4E968990224DCD9000D2B6F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E96898E224DCD9000D2B6F5 /* Main.storyboard */; };
 		4E968992224DCD9100D2B6F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E968991224DCD9100D2B6F5 /* Assets.xcassets */; };
@@ -23,6 +28,11 @@
 
 /* Begin PBXFileReference section */
 		4E007AF22259348F0043D3D6 /* UIColorExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
+		4E03369B2262589800155975 /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
+		4E03369D2262737D00155975 /* UserInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
+		4E03369F22627A8C00155975 /* UserFailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFailCell.swift; sourceTree = "<group>"; };
+		4E0336A1226292F200155975 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4E7F36A7227024BF00D73704 /* HoverViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverViewFlowLayout.swift; sourceTree = "<group>"; };
 		4E968987224DCD9000D2B6F5 /* LiveStreamFails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveStreamFails.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E96898A224DCD9000D2B6F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E96898F224DCD9000D2B6F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -110,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				4E96899D224DCEC300D2B6F5 /* FailViewController.swift */,
+				4E03369B2262589800155975 /* UserDetailViewController.swift */,
+				4E7F36A7227024BF00D73704 /* HoverViewFlowLayout.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -135,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				4E9689A8224DD37500D2B6F5 /* LSFLog.swift */,
+				4E0336A1226292F200155975 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -143,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				4E9689AB224DDDFF00D2B6F5 /* FailCell.swift */,
+				4E03369D2262737D00155975 /* UserInfoHeader.swift */,
+				4E03369F22627A8C00155975 /* UserFailCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -279,13 +294,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E9689A6224DD12500D2B6F5 /* LSFNetworkService.swift in Sources */,
+				4E7F36A8227024BF00D73704 /* HoverViewFlowLayout.swift in Sources */,
 				4E007AF32259348F0043D3D6 /* UIColorExt.swift in Sources */,
+				4E03369C2262589800155975 /* UserDetailViewController.swift in Sources */,
+				4E0336A022627A8C00155975 /* UserFailCell.swift in Sources */,
 				4E9689A1224DD08400D2B6F5 /* Models.swift in Sources */,
 				4E9689AC224DDDFF00D2B6F5 /* FailCell.swift in Sources */,
 				4E96899E224DCEC300D2B6F5 /* FailViewController.swift in Sources */,
 				4E96898B224DCD9000D2B6F5 /* AppDelegate.swift in Sources */,
 				4E9689A9224DD37500D2B6F5 /* LSFLog.swift in Sources */,
 				4E9689A5224DD12500D2B6F5 /* LSFService.swift in Sources */,
+				4E03369E2262737D00155975 /* UserInfoHeader.swift in Sources */,
+				4E0336A2226292F200155975 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
