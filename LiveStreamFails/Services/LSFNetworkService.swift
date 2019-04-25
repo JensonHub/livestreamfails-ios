@@ -9,7 +9,7 @@
 import UIKit
 import Reachability
 
-let TTReachabilityServiceUpdated:String = "TTReachabilityServiceUpdated"
+let LSFReachabilityServiceUpdated:String = "TTReachabilityServiceUpdated"
 
 public enum Method: String, CustomStringConvertible {
     case OPTIONS = "OPTIONS"
@@ -241,32 +241,31 @@ public func jsonResource<A>(token: String?, path: String, method: Method, reques
     return Resource(path: path, method: method, requestBody: jsonBody, headers: headers, parse: parse)
 }
 
-class TTReachabilityService: NSObject {
-    static let sharedManager = TTReachabilityService()
+class LSFReachabilityService: NSObject {
+    private static let reachabilityManager = { () -> Reachability in
+        let manager = Reachability(hostname: "https://livestreamfails.com")
+        return manager!
+    }()
     
-    let reachability = Reachability(hostname: "https://livestreamfails.com")
-    
-    class func turnOn() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged(_:)), name: Notification.Name.reachabilityChanged, object: nil)
+    static func startMonitoring() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged(_:)), name: .reachabilityChanged, object: nil)
         do{
-            try self.sharedManager.reachability?.startNotifier()
+            try reachabilityManager.startNotifier()
         }catch{
             println("could not start reachability notifier")
         }
     }
-    
+
     @objc class func reachabilityChanged(_ note: NSNotification) {
-        let reachability = note.object as! Reachability
-        switch reachability.connection {
-        case .wifi:
-            println("Reachable via WiFi") //push Notification
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "TTReachabilityServiceUpdated"), object: nil)
-        case .cellular:
-            println("Reachable via Cellular") //push Notification
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "TTReachabilityServiceUpdated"), object: nil)
-        case .none:
-            println("Network not reachable") //push Notification
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "TTReachabilityServiceUpdated"), object: nil)
-        }
+        println("LSFReachability Service Updated")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: LSFReachabilityServiceUpdated), object: nil)
+    }
+
+    class func connectionStatus() ->Reachability.Connection {
+        return reachabilityManager.connection
+    }
+
+    static func isNoneStatus(status: Reachability.Connection) -> Bool {
+        return status == .none
     }
 }

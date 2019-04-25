@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreLocation
-import Alamofire
 import SwiftSoup
 
 let spBaseURL = NSURL(string: "https://livestreamfails.com")!
@@ -85,6 +84,7 @@ func getStreamerDetail(streamerID: String, failureHandler: ((Reason, String?) ->
         return nil
     }
     
+    //println("get Streamer Detail request \(requestParameters)")
     let resource = jsonResource(path: "/streamer/" + streamerID, method: .GET, requestParameters: requestParameters as JSONDictionary, parse: parse)
     if let failureHandler = failureHandler {
         apiRequest(modifyRequest: {_ in}, baseURL: spBaseURL, resource: resource, failure: failureHandler, completion: completion)
@@ -321,10 +321,28 @@ func getStreamerPost(page: Int, order: PostOrder, timeFrame: PostTimeFrame, stre
                         newPost.thumbnailURL = try thumbnailElement.attr("src")
                     }
                     
-                    if let streamerInfoElement = try element.select("div.stream-info > small.text-muted > a").first(){
-                        let streamerURL = try streamerInfoElement.attr("href")
-                        newPost.streamerID = (streamerURL as NSString).lastPathComponent
+                    let infoElements = try element.select("div.stream-info > small.text-muted > a")
+                    for infoElement in infoElements.array() {
+                        let urlElement = try infoElement.attr("href") as NSString
+                        if urlElement.contains("streamer") {
+                            newPost.streamerID = urlElement.lastPathComponent
+                            newPost.streamer = try infoElement.text()
+                        } else if urlElement.contains("game") {
+                            newPost.gameID = urlElement.lastPathComponent
+                            newPost.game = try infoElement.text()
+                        }
                     }
+                    
+                    let pointElements = try element.select("div.card-body > a > small.text-muted")
+                    for pointElement in pointElements.array() {
+                        let element = try pointElement.text()
+                        if element.contains("points") {
+                            newPost.point = element
+                        } else if element.contains("ago") {
+                            newPost.date = element
+                        }
+                    }
+                    
                     postList.append(newPost)
                 }
                 

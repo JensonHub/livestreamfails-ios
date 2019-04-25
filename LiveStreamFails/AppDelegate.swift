@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //delay launch screen dismiss
         Thread.sleep(forTimeInterval: 1.0)
         
+        LSFReachabilityService.startMonitoring()
+        
         //navgationBar
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.tintColor = UIColor.lsfNavgationBarTitleColor()

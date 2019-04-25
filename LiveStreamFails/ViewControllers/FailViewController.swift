@@ -10,8 +10,8 @@ import UIKit
 import ESPullToRefresh
 
 class FailViewController: UICollectionViewController {
-    let cellIDEmpty = "EmptyFailCell"
-    let cellID = "FailCell"
+    let EMPTY_FAIL_CELL = "EmptyFailCell"
+    let FAIL_CELL = "FailCell"
     
     lazy var controlView: ZFPlayerControlView = {
         let cv = ZFPlayerControlView()
@@ -35,15 +35,15 @@ class FailViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        initSubView()
     }
     
-    fileprivate func setup() {
+    fileprivate func initSubView() {
         view.backgroundColor = UIColor.lsfBgColor()
         collectionView.backgroundColor = .clear
         collectionView.alwaysBounceVertical = true
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.register(FailCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView.register(FailCell.self, forCellWithReuseIdentifier: FAIL_CELL)
         collectionView.es.addInfiniteScrolling {
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else {
@@ -103,7 +103,7 @@ class FailViewController: UICollectionViewController {
                         return
                     }
                     
-                    if posts.count == 0 {
+                    if posts.count == 0 && strongSelf.currentPageIndex > 1 {
                         strongSelf.currentPageIndex -= 1
                     }
                     
@@ -125,15 +125,23 @@ class FailViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! FailCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FAIL_CELL, for: indexPath) as! FailCell
         let post = posts[indexPath.row]
         
         cell.initData(post: post)
-        cell.playClickAction = { url, cover  in
+        cell.playClickAction = { url, cover in
             DispatchQueue.main.async { [weak self] in
                 if let strongSelf = self, let url = url, let videoURL = URL(string: url) {
                     strongSelf.player.playTheIndexPath(indexPath, assetURL: videoURL, scrollToTop: false)
                     strongSelf.controlView.showTitle("", cover: cover, fullScreenMode: .landscape)
+                }
+            }
+        }
+        cell.userClickAction = { user in
+            DispatchQueue.main.async { [weak self] in
+                if let strongSelf = self, let user = user {
+                    let controller = UINavigationController(rootViewController: UserDetailViewController.init(user: user))
+                    strongSelf.present(controller, animated: true, completion: nil)
                 }
             }
         }
@@ -164,7 +172,6 @@ extension FailViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension FailViewController {
-    
     override var shouldAutorotate: Bool {
         return self.player.shouldAutorotate
     }
